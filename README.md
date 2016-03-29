@@ -1,6 +1,6 @@
-# Typed Hapi Auth Bearer Token
+# Typed webpack-isomorphic-tools
 
-The type definition for [`typed-hapi-auth-bearer-token`](https://github.com/johnbrett/hapi-auth-bearer-token).
+The type definition for [`typed-webpack-isomorphic-tools`](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
 
 # LICENSE
 
