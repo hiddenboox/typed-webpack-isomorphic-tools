@@ -1,29 +1,29 @@
 declare module 'webpack-isomorphic-tools' {
-    import {WebpackIsomorphicToolsPluginOptions} from 'webpack-isomorphic-tools/plugin';
+    import * as webpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 
-    class WebpackIsomorphicTools {
-        constructor(configuration: WebpackIsomorphicToolsPluginOptions);
-        development(isDevelopmentMode: boolean): WebpackIsomorphicTools;
-        server(context: string, callback: Function);
-        refresh(): void;
-        assets(): WebpackIsomorphicTools.Assets;
+    export class WebpackIsomorphicTools {
+        constructor(configuration: webpackIsomorphicToolsPlugin.WebpackIsomorphicToolsPlugin);
+
+        development(isDevelopmentMode:boolean): WebpackIsomorphicTools;
+
+        server(context:string, callback:Function);
+
+        refresh():void;
+
+        assets(): Assets;
     }
 
-    namespace WebpackIsomorphicTools {
-        interface Assets {
-            javascript?: Array<string>;
-            styles?: Array<string>;
-        }
+    export interface Assets {
+        javascript?: Array<string>;
+        styles?: Array<string>;
     }
-
-    export = WebpackIsomorphicTools;
 }
 
-namespace WebpackIsomorphicToolsPlugin {
+declare module 'webpack-isomorphic-tools/plugin' {
     import * as webpack from 'webpack';
 
     export class WebpackIsomorphicToolsPlugin {
-        constructor(configuration: WebpackIsomorphicToolsPlugin.WebpackIsomorphicToolsPluginOptions);
+        constructor(configuration: WebpackIsomorphicToolsPluginOptions);
 
         development(isDevelopmentMode?: boolean): WebpackIsomorphicToolsPlugin;
         regular_expression(opt: any): Function;
@@ -33,29 +33,23 @@ namespace WebpackIsomorphicToolsPlugin {
         static css_loader_parser: string;
     }
 
-    export namespace WebpackIsomorphicToolsPlugin {
-        interface WebpackIsomorphicToolsPluginAssetsOptions {
-            images: { extensions: string[] };
-            html: { extension: string };
-            fonts: { extension: string };
-            styles: {
-                extension: string,
-                filter(module: webpack.Module, regularExpression: RegExp, options?: any, log?: any): any,
-                path: string,
-                parser: string
-            };
-        }
-
-        interface WebpackIsomorphicToolsPluginOptions {
-            requireContext?: boolean;
-            debug?: boolean;
-            webpackAssetsFilePath?: string;
-            webpackStatsFilePath?: string;
-            assets: WebpackIsomorphicToolsPluginAssetsOptions;
-        }
+    export interface WebpackIsomorphicToolsPluginAssetsOptions {
+        images: { extensions: string[] };
+        html: { extension: string };
+        fonts: { extension: string };
+        styles: {
+            extension: string,
+            filter(module: webpack.Module, regularExpression: RegExp, options?: any, log?: any): any,
+            path: string,
+            parser: string
+        };
     }
-}
 
-declare module 'webpack-isomorphic-tools/plugin' {
-  export = WebpackIsomorphicToolsPlugin;
+    export interface WebpackIsomorphicToolsPluginOptions {
+        requireContext?: boolean;
+        debug?: boolean;
+        webpackAssetsFilePath?: string;
+        webpackStatsFilePath?: string;
+        assets: WebpackIsomorphicToolsPluginAssetsOptions;
+    }
 }
