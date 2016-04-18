@@ -19,10 +19,10 @@ declare module 'webpack-isomorphic-tools' {
     export = WebpackIsomorphicTools;
 }
 
-declare module 'webpack-isomorphic-tools/plugin' {
+namespace WebpackIsomorphicToolsPlugin {
     import * as webpack from 'webpack';
 
-    class WebpackIsomorphicToolsPlugin {
+    export class WebpackIsomorphicToolsPlugin {
         constructor(configuration: WebpackIsomorphicToolsPlugin.WebpackIsomorphicToolsPluginOptions);
 
         development(isDevelopmentMode?: boolean): WebpackIsomorphicToolsPlugin;
@@ -33,7 +33,7 @@ declare module 'webpack-isomorphic-tools/plugin' {
         static css_loader_parser: string;
     }
 
-    namespace WebpackIsomorphicToolsPlugin {
+    export namespace WebpackIsomorphicToolsPlugin {
         interface WebpackIsomorphicToolsPluginAssetsOptions {
             images: { extensions: string[] };
             html: { extension: string };
@@ -54,6 +54,8 @@ declare module 'webpack-isomorphic-tools/plugin' {
             assets: WebpackIsomorphicToolsPluginAssetsOptions;
         }
     }
+}
 
-    export = WebpackIsomorphicToolsPlugin;
+declare module 'webpack-isomorphic-tools/plugin' {
+  export = WebpackIsomorphicToolsPlugin;
 }
